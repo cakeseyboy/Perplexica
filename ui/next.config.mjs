@@ -8,10 +8,12 @@ const nextConfig = {
       },
     ],
   },
+  // Production settings
+  distDir: '.next',
   // Disable standalone output as it might cause issues with Vercel deployment
   // output: 'standalone',
+  // Enable modern features
   experimental: {
-    // Enable modern features
     serverActions: true,
   },
   // Ensure proper environment handling
@@ -19,7 +21,7 @@ const nextConfig = {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_WS_URL: process.env.NEXT_PUBLIC_WS_URL,
   },
-  // Proper rewrites configuration for API
+  // Handle all routes properly
   async rewrites() {
     return [
       {
@@ -28,6 +30,12 @@ const nextConfig = {
       },
     ];
   },
+  // Ensure proper handling of 404s
+  async redirects() {
+    return [];
+  },
+  // Ensure proper trailing slashes
+  trailingSlash: false,
 };
 
 export default nextConfig;
