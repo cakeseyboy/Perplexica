@@ -5,5 +5,6 @@ dockerfilePath = "searxng.dockerfile"
 [deploy]
 startCommand = ""
 healthcheckPath = "/"
+healthcheckTimeout = "180"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3 

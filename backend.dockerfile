@@ -1,5 +1,8 @@
 FROM node:18-slim
 
+ARG RAILWAY_SERVICE_NAME
+ARG RAILWAY_ENVIRONMENT
+
 WORKDIR /home/perplexica
 
 COPY src /home/perplexica/src
