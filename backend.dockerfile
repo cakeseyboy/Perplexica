@@ -10,6 +10,7 @@ COPY tsconfig.json /home/perplexica/
 COPY drizzle.config.ts /home/perplexica/
 COPY package.json /home/perplexica/
 COPY yarn.lock /home/perplexica/
+COPY config.base.toml /home/perplexica/config.toml
 
 RUN mkdir /home/perplexica/data
 RUN mkdir /home/perplexica/uploads

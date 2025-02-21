@@ -22,6 +22,7 @@ yarn-error.log
 
 # Config files
 config.toml
+!config.base.toml
 
 # Log files
 logs/
