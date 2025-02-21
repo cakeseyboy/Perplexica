@@ -23,6 +23,11 @@ app.get('/api', (_, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+// Add health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'healthy' });
+});
+
 server.listen(port, () => {
   logger.info(`Server is running on port ${port}`);
 });

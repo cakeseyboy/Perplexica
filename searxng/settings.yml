@@ -1,16 +1,58 @@
 use_default_settings: true
 
 general:
-  instance_name: 'searxng'
+  debug: false
+  instance_name: "perplexica-searxng"
+  enable_metrics: false
 
 search:
-  autocomplete: 'google'
+  safe_search: 0
+  autocomplete: "google"
+  default_lang: ""
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 120
   formats:
     - html
     - json
 
 server:
-  secret_key: 'a2fb23f1b02e6ee83875b09826990de0f6bd908b6638e8c10277d415f6ab852b' # Is overwritten by ${SEARXNG_SECRET}
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "${SEARXNG_SECRET_KEY}"
+  base_url: "https://${RAILWAY_PUBLIC_DOMAIN}/"
+  image_proxy: true
+  http_protocol_version: "1.0"
+  method: "GET"
+  default_http_headers:
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    X-Download-Options: noopen
+    X-Robots-Tag: noindex, nofollow
+    Referrer-Policy: no-referrer
+
+ui:
+  static_path: ""
+  templates_path: ""
+  default_theme: simple
+  default_locale: en
+  results_on_new_tab: false
+
+redis:
+  url: false
+
+outgoing:
+  request_timeout: 5.0
+  max_request_timeout: 15.0
+  useragent_suffix: ""
+  pool_connections: 100
+  pool_maxsize: 10
+  enable_http2: true
+  retries: 1
+  retry_on_http_error: true
+  max_redirects: 5
+  http_proxy: ""
+  https_proxy: ""
+  keep_only_successful_http_response: true
 
 engines:
   - name: wolframalpha
