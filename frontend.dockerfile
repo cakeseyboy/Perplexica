@@ -14,12 +14,19 @@ COPY ui/ .
 # Build the Next.js app
 RUN yarn build
 
-# Set up for standalone mode
-RUN cp -r .next/static .next/standalone/.next/static
-RUN cp -r public .next/standalone/public
+# Set up the standalone environment
+WORKDIR /app/.next/standalone
+
+# Copy standalone files
+RUN cp -r /app/.next/static ./.next/static
+RUN cp -r /app/public ./public
 
 # Expose the port
 EXPOSE 3000
 
+# Set the environment variable for the port
+ENV PORT=3000
+ENV NODE_ENV=production
+
 # Start the standalone server
-CMD ["node", ".next/standalone/server.js"] 
+CMD ["node", "server.js"] 
