@@ -1,6 +1,6 @@
 FROM node:20.18.0-alpine AS builder
 
-WORKDIR /home/perplexica
+WORKDIR /app
 
 # Copy package files first for better caching
 COPY ui/package.json ui/yarn.lock ./
@@ -14,24 +14,28 @@ COPY ui/ .
 # Build Next.js
 RUN yarn build
 
+# Debug: Show what files are in the standalone directory
+RUN ls -la .next/standalone
+
 # Production image, copy all the files and run next
 FROM node:20.18.0-alpine AS runner
 
-WORKDIR /home/perplexica
+WORKDIR /app
 
-# Set environment variables
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-# Copy necessary files
-COPY --from=builder /home/perplexica/package.json ./package.json
-COPY --from=builder /home/perplexica/node_modules ./node_modules
-COPY --from=builder /home/perplexica/.next ./.next
-COPY --from=builder /home/perplexica/public ./public
+# Copy standalone files and static assets
+COPY --from=builder /app/.next/standalone/ ./
+COPY --from=builder /app/.next/static/ ./.next/static/
+COPY --from=builder /app/public/ ./public/
+
+# Debug: Show what files are in the final directory
+RUN ls -la
 
 # Expose the port
 EXPOSE 3000
 
 # Start the server
-CMD ["yarn", "start", "-p", "3000"] 
+CMD ["node", "server.js"] 
