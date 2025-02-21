@@ -14,12 +14,19 @@ COPY ui/ .
 # Build the Next.js app
 RUN yarn build
 
+# Create standalone directory
+RUN mkdir -p /app/.next/standalone
+RUN cp -r /app/.next/static /app/.next/standalone/.next/
+RUN cp -r /app/public /app/.next/standalone/
+RUN cp -r /app/.next/standalone/* /app/
+
 # Expose the port
 EXPOSE 3000
 
-# Set the environment variable for the port
+# Set the environment variables
 ENV PORT=3000
 ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 
-# Start the server
-CMD ["yarn", "start"] 
+# Start the server using the standalone output
+CMD ["node", "server.js"] 
