@@ -15,13 +15,13 @@ COPY ui/ .
 RUN yarn build
 
 # Create standalone directory structure
-RUN mkdir -p /app/standalone
+RUN mkdir -p /app/standalone/.next/static
 WORKDIR /app/standalone
 
 # Copy necessary files for standalone mode
 RUN cp -r /app/.next/standalone/* ./
-RUN cp -r /app/.next/static ./.next/static
-RUN cp -r /app/public ./public
+RUN cp -r /app/.next/static/* ./.next/static/
+RUN mkdir -p public && cp -r /app/public/* ./public/
 
 # Expose the port
 EXPOSE 3000
