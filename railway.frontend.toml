@@ -3,7 +3,7 @@ builder = "DOCKERFILE"
 dockerfilePath = "frontend.dockerfile"
 
 [deploy]
-startCommand = "yarn start"
+startCommand = "node .next/standalone/server.js"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3
 numReplicas = 1 

@@ -14,8 +14,12 @@ COPY ui/ .
 # Build the Next.js app
 RUN yarn build
 
+# Set up for standalone mode
+RUN cp -r .next/static .next/standalone/.next/static
+RUN cp -r public .next/standalone/public
+
 # Expose the port
 EXPOSE 3000
 
-# Start the app
-CMD ["yarn", "start"] 
+# Start the standalone server
+CMD ["node", ".next/standalone/server.js"] 
