@@ -14,10 +14,12 @@ COPY ui/ .
 # Build the Next.js app
 RUN yarn build
 
-# Set up the standalone environment
-WORKDIR /app/.next/standalone
+# Create standalone directory structure
+RUN mkdir -p /app/standalone
+WORKDIR /app/standalone
 
-# Copy standalone files
+# Copy necessary files for standalone mode
+RUN cp -r /app/.next/standalone/* ./
 RUN cp -r /app/.next/static ./.next/static
 RUN cp -r /app/public ./public
 
