@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  distDir: '.next',
   images: {
     remotePatterns: [
       {
@@ -10,12 +9,9 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    outputFileTracingRoot: process.env.NODE_ENV === "production" ? "/app" : undefined,
-    outputStandalone: true,
-  },
   poweredByHeader: false,
   generateEtags: false,
+  swcMinify: true,
 };
 
 export default nextConfig;
