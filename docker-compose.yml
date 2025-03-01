@@ -31,7 +31,6 @@ services:
     volumes:
       - backend-data:/home/perplexica/data
       - uploads:/home/perplexica/uploads
-      - ./config.toml:/home/perplexica/config.toml:ro
     depends_on:
       - searxng
     networks:
