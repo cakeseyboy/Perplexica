@@ -42,15 +42,15 @@ services:
       context: .
       dockerfile: frontend.dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:3001}
-        - NEXT_PUBLIC_WS_URL=${NEXT_PUBLIC_WS_URL:-ws://backend:3001}
+        - NEXT_PUBLIC_API_URL=https://perplexica-backend.cakez.net
+        - NEXT_PUBLIC_WS_URL=wss://perplexica-backend.cakez.net/ws
     image: ${REGISTRY_IMAGE_FRONTEND:-perplexica-frontend}:${IMAGE_TAG:-latest}
     container_name: perplexica-frontend
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:3001}
-      - NEXT_PUBLIC_WS_URL=${NEXT_PUBLIC_WS_URL:-ws://backend:3001}
+      - NEXT_PUBLIC_API_URL=https://perplexica-backend.cakez.net
+      - NEXT_PUBLIC_WS_URL=wss://perplexica-backend.cakez.net/ws
     depends_on:
       - backend
     networks:
