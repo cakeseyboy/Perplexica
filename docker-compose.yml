@@ -20,7 +20,7 @@ services:
     container_name: perplexica-backend
     environment:
       - NODE_ENV=production
-      - SEARXNG_API_URL=http://searxng:8080
+      - SEARXNG_API_URL=https://search.nj1.cakez.net
       - PORT=3001
       # API Keys
       - OPENAI_API_KEY=${OPENAI_API_KEY}
